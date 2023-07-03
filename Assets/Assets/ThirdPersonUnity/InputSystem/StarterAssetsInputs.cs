@@ -12,6 +12,7 @@ namespace StarterAssets
 		public Vector2 look;
 		public bool jump;
 		public bool sprint;
+		public bool drive;
 
 		[Header("Movement Settings")]
 		public bool analogMovement;
@@ -43,6 +44,11 @@ namespace StarterAssets
 		{
 			SprintInput(value.isPressed);
 		}
+
+		public void OnDrive(InputValue value)
+		{
+			DriveInput(value.isPressed);
+		}
 #endif
 
 
@@ -64,6 +70,10 @@ namespace StarterAssets
 		public void SprintInput(bool newSprintState)
 		{
 			sprint = newSprintState;
+		}
+		public void DriveInput(bool newDriveState)
+		{
+			drive = newDriveState;
 		}
 
 		private void OnApplicationFocus(bool hasFocus)
