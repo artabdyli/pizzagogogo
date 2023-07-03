@@ -14,6 +14,7 @@ public class DriveCar : MonoBehaviour
     private CarController carController;
     private PlayerInput carInput;
     [SerializeField] private GameObject carFollowCam;
+    private NavigationSystem navigationSystem;
 
 
     private void Start()
@@ -21,6 +22,7 @@ public class DriveCar : MonoBehaviour
         carController = GetComponent<CarController>();
         input = GetComponent<StarterAssetsInputs>();
         carInput = GetComponent<PlayerInput>();
+        navigationSystem = GetComponent<NavigationSystem>();
         playerInput = GameObject.FindGameObjectWithTag("Player").GetComponent<StarterAssetsInputs>();
     }
     private void Update()
@@ -47,6 +49,7 @@ public class DriveCar : MonoBehaviour
         player.SetActive(false);
         carController.enabled = true;
         carInput.enabled = true;
+        navigationSystem.enabled = true;
         carFollowCam.SetActive(true);
 
     }
@@ -55,8 +58,9 @@ public class DriveCar : MonoBehaviour
     {
         carController.enabled = false;
         carInput.enabled = false;
+        navigationSystem.enabled = false;
         carFollowCam.SetActive(false);
-        player.SetActive(true);
         player.transform.position = new Vector3(this.transform.position.x + 2, this.transform.position.y, this.transform.position.z);
+        player.SetActive(true);
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class DeliverySystem : MonoBehaviour
@@ -13,6 +14,12 @@ public class DeliverySystem : MonoBehaviour
     private NPC npcScript;
     int i = 0;
     public bool isDelivering = false;
+    [Header("DeliveryUI")]
+    [SerializeField] private TMP_Text deliveryName;
+    [SerializeField] private TMP_Text deliveryStreet;
+    [SerializeField] private TMP_Text moneyText;
+    private int tip;
+    private int overallMoney = 0;
 
     public void PizzaSpawn()
     {
@@ -39,8 +46,12 @@ public class DeliverySystem : MonoBehaviour
             handTransform.localRotation = Quaternion.Euler(new Vector3(29.24f, 116.25f, 166.33f));
             
             npcScript.DisableNPC();
+            overallMoney = overallMoney + tip;
+            moneyText.text = overallMoney+ "€";
 
             isDelivering = false;
+            deliveryName.text = "";
+            deliveryStreet.text = "";
         }
     }
     public void PickDelivery()
@@ -49,6 +60,9 @@ public class DeliverySystem : MonoBehaviour
         npcScript = npcs[i].GetComponent<NPC>();
         Debug.Log("Delivery to " + npcScript.name);
         npcScript.ActivateNPC();
+        deliveryName.text = npcScript.npcData.npcName;
+        deliveryStreet.text = npcScript.npcData.street;
+        tip = Random.Range(npcScript.npcData.minTip, npcScript.npcData.maxTip);
     }
 
 }

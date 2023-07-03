@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class NPC : MonoBehaviour
 {
-    //Change with Script. Object
-    public string name;
+    public NPCSO npcData;
    [SerializeField] private Animator poi;
     private BoxCollider bc;
     private void Start()

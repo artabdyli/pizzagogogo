@@ -8,6 +8,7 @@ TagManager:
   - Car
   - PizzaPlace
   - NPC
+  - Road
   layers:
   - Default
   - TransparentFX
