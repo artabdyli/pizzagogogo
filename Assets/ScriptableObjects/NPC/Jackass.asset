@@ -16,3 +16,5 @@ MonoBehaviour:
   street: Broke Street 5
   maxTip: 0
   minTip: 0
+  maxTime: 50
+  minTime: 30

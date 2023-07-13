@@ -9,6 +9,8 @@ TagManager:
   - PizzaPlace
   - NPC
   - Road
+  - DeathZone
+  - SpawnPoint
   layers:
   - Default
   - TransparentFX

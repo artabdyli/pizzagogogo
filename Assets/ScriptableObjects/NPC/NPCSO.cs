@@ -10,4 +10,6 @@ public class NPCSO : ScriptableObject
     public string street;
     public int maxTip;
     public int minTip;
+    public float maxTime;
+    public float minTime;
 }

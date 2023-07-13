@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 using UnityEngine.InputSystem;
@@ -13,6 +14,8 @@ namespace StarterAssets
 		public bool jump;
 		public bool sprint;
 		public bool drive;
+		public bool click;
+		public bool exit;
 
 		[Header("Movement Settings")]
 		public bool analogMovement;
@@ -49,6 +52,15 @@ namespace StarterAssets
 		{
 			DriveInput(value.isPressed);
 		}
+	public void OnClick(InputValue value)
+		{
+			ClickInput(value.isPressed);
+		}
+
+		public void OnExit(InputValue value)
+		{
+			ExitInput(value.isPressed);
+		}
 #endif
 
 
@@ -74,6 +86,14 @@ namespace StarterAssets
 		public void DriveInput(bool newDriveState)
 		{
 			drive = newDriveState;
+		}
+		public void ClickInput(bool newClickState)
+		{
+			click = newClickState;
+		}
+		public void ExitInput(bool newExitState)
+		{
+			exit = newExitState;
 		}
 
 		private void OnApplicationFocus(bool hasFocus)

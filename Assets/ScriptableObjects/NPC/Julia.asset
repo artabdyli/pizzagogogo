@@ -16,3 +16,5 @@ MonoBehaviour:
   street: Love Lane 17
   maxTip: 15
   minTip: 5
+  maxTime: 20
+  minTime: 10

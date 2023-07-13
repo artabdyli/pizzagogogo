@@ -1,6 +1,8 @@
-﻿using UnityEngine;
+﻿
+using UnityEngine;
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 #endif
 
 /* Note: animations are called via the controller for both the character and capsule using animator null checks
@@ -98,6 +100,12 @@ namespace StarterAssets
         private int _animIDFreeFall;
         private int _animIDMotionSpeed;
 
+        //spawnpoint
+        private Transform spawnPoint;
+
+        [Header("Pause Menu")]
+        [SerializeField] private GameObject pauseMenu;
+
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
         private PlayerInput _playerInput;
 #endif
@@ -125,6 +133,8 @@ namespace StarterAssets
 
         private void Awake()
         {
+            Cursor.lockState = CursorLockMode.Locked;      
+                Cursor.visible = false;
             // get a reference to our main camera
             if (_mainCamera == null)
             {
@@ -134,6 +144,8 @@ namespace StarterAssets
 
         private void Start()
         {
+            spawnPoint = GameObject.FindGameObjectWithTag("SpawnPoint").transform;
+            this.transform.position = spawnPoint.position;
             _cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
             
             _hasAnimator = TryGetComponent(out _animator);
@@ -159,7 +171,9 @@ namespace StarterAssets
             JumpAndGravity();
             GroundedCheck();
             Move();
+            Pause();
         }
+
 
         private void LateUpdate()
         {
@@ -386,6 +400,40 @@ namespace StarterAssets
             if (animationEvent.animatorClipInfo.weight > 0.5f)
             {
                 AudioSource.PlayClipAtPoint(LandingAudioClip, transform.TransformPoint(_controller.center), FootstepAudioVolume);
+            }
+        }
+        private void Pause()
+        {
+            if(_input.exit)
+            {
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+                pauseMenu.SetActive(true);
+                Time.timeScale=0;
+                _input.exit = false;
+
+            }
+        }
+
+        public void Resume()
+        {
+            Time.timeScale = 1;
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            pauseMenu.SetActive(false); 
+            
+        }
+
+        public void Menu()
+        {
+            Time.timeScale=1;
+            SceneManager.LoadScene("MainMenu");
+        }
+        private void OnTriggerEnter(Collider other)
+        {
+            if(other.CompareTag("DeathZone"))
+            {
+                this.transform.position = spawnPoint.position;
             }
         }
     }

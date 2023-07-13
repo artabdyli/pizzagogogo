@@ -16,3 +16,5 @@ MonoBehaviour:
   street: Central Park
   maxTip: 5
   minTip: 0
+  maxTime: 35
+  minTime: 30

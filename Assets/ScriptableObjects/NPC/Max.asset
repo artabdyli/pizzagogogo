@@ -16,3 +16,5 @@ MonoBehaviour:
   street: Goofy Street 5
   maxTip: 10
   minTip: 0
+  maxTime: 30
+  minTime: 20

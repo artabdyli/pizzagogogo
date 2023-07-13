@@ -14,8 +14,9 @@ public class NPC : MonoBehaviour
     }
     public void ActivateNPC()
     {
-        poi.SetBool("isEnabled", true);
         bc.enabled = true;
+        poi.SetBool("isEnabled", true);
+        
 
     }
     public void DisableNPC()

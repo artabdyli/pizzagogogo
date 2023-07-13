@@ -60,7 +60,7 @@ public class DriveCar : MonoBehaviour
         carInput.enabled = false;
         navigationSystem.enabled = false;
         carFollowCam.SetActive(false);
-        player.transform.position = new Vector3(this.transform.position.x + 2, this.transform.position.y, this.transform.position.z);
+        player.transform.position = new Vector3(this.transform.position.x + 2f, this.transform.position.y + 1f, this.transform.position.z);
         player.SetActive(true);
     }
 }
